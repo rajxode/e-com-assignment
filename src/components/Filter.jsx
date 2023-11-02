@@ -5,8 +5,13 @@
 const Filter = () => {
     return(
         <>
-            <div className="w-full h-[100px] bg-[#ffffff] px-[5%] py-2 rounded shadow">
-                Filter
+            <div className="w-[15%] min-h-[250px] h-fit bg-[#ffffff] rounded shadow flex flex-col">
+                <div className="w-full p-2 text-xl font-bold min-h-[35px] border-b">
+                    Filter
+                </div>
+                <div>
+                    Price
+                </div>
             </div>
         </>
     )

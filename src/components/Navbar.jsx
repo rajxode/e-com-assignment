@@ -21,9 +21,9 @@ import styled from "styled-components";
 const Navbar = () => {
     return(
         <>
-            <nav className="w-full h-[55px] bg-[#ffffff] flex justify-around items-center shadow-md">
+            <nav className="w-full h-[55px] bg-[#2874f0] flex justify-around items-center shadow-md text-white">
                 
-                <div className="w-[10%] h-full flex justify-center items-center text-2xl font-bold text-blue-600">
+                <div className="w-[10%] h-full flex justify-center items-center text-2xl font-bold">
                     <i>
                         ProductCart
                     </i>
@@ -32,7 +32,7 @@ const Navbar = () => {
                     <span className="w-[30px] px-1 h-[30px] bg-transparent text-slate-400 text-center">
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </span>
-                    <input type="text" placeholder="Search . . ." className="w-full h-[29px] px-2 bg-transparent focus:outline-none"/>
+                    <input type="text" placeholder="Search. . ." className="w-full h-[29px] px-2 bg-transparent focus:outline-none"/>
                 </div>
                 <div className="w-[30%] h-full flex justify-between items-center px-[1%] text-xl">
 
