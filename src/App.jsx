@@ -2,6 +2,8 @@
 import styled from "styled-components"
 import Navbar from "./components/Navbar";
 import MainContainer from "./components/MainContainer";
+import SingleProduct from "./components/SingleProduct";
+import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
 
 const Home = styled.div`
   width:100%;
@@ -12,10 +14,19 @@ const Home = styled.div`
 
 
 function App() {
+
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+        <Route path='/' element={<Navbar />}>
+          <Route index element={<MainContainer />} />
+          <Route path="single-product" element={<SingleProduct />} />
+        </Route>
+    )
+  )
+
   return (
-    <Home className="bg-[#f1f2f4]">
-      <Navbar />
-      <MainContainer />
+    <Home>
+      <RouterProvider router={router} />
     </Home>
   )
 }

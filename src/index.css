@@ -20,3 +20,15 @@
 body {
   margin: 0;
 }
+
+/* styling the scrollbar  */
+::-webkit-scrollbar {
+  width: 5px;
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cfcfcf; 
+  border-radius: 10px;
+  height: 10px;
+}

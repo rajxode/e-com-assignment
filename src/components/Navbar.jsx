@@ -1,3 +1,4 @@
+import { Link, Outlet } from "react-router-dom";
 import styled from "styled-components";
 
 
@@ -24,9 +25,11 @@ const Navbar = () => {
             <nav className="w-full h-[55px] bg-[#2874f0] flex justify-around items-center shadow-md text-white">
                 
                 <div className="w-[10%] h-full flex justify-center items-center text-2xl font-bold">
-                    <i>
-                        ProductCart
-                    </i>
+                    <Link to='/'>
+                        <i>
+                            ProductCart
+                        </i>
+                    </Link>
                 </div>
                 <div className="w-2/5 h-fit flex justify-center items-center bg-[#f1f5ff] text-black text-xl p-1 rounded">
                     <span className="w-[30px] px-1 h-[30px] bg-transparent text-slate-400 text-center">
@@ -62,6 +65,7 @@ const Navbar = () => {
                     </button>
                 </div>
             </nav>
+            <Outlet />
         </>
     )
 }

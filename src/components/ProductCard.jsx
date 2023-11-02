@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -5,6 +6,13 @@
 const ProductCard = (props) => {
 
     const {product} = props;
+
+    const navigate = useNavigate();
+
+    const handleClick = (e) => {
+        e.preventDefault();
+        navigate('/single-product');
+    }
 
     return(
         <>
@@ -14,13 +22,15 @@ const ProductCard = (props) => {
                 <i class="fa-solid fa-heart"></i>
                 </div>
                 
-                <div className="w-full h-2/3 cursor-pointer">
+                <div className="w-full h-2/3 cursor-pointer" 
+                    onClick={handleClick}>
                     <img src={product.thumbnail} alt="pic" className="w-full h-full" />
                 </div>
 
                 <div className="h-1/3 w-full flex flex-col justify-between pt-2">
                     <div className="h-[30%] w-full font-semibold flex flex-col">
-                        <span className="w-full overflow-hidden cursor-pointer hover:text-blue-400">
+                        <span className="w-full overflow-hidden cursor-pointer hover:text-blue-400"
+                            onClick={handleClick}>
                             {product.title}
                         </span>
                         <span className="text-sm font-normal text-slate-400">
