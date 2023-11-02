@@ -1,32 +1,25 @@
+import { useSelector } from "react-redux";
+import { productSelector } from "../Redux/Reducers/productReducer";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 
 const SingleProduct = () => {
 
-    const singleProduct = {
-        "id": 1,
-        "title": "iPhone 9",
-        "description": "An apple mobile which is nothing like apple",
-        "price": 549,
-        "discountPercentage": 12.96,
-        "rating": 4.69,
-        "stock": 94,
-        "brand": "Apple",
-        "category": "smartphones",
-        "thumbnail": "https://i.dummyjson.com/data/products/1/thumbnail.jpg",
-        "images": [
-            "https://i.dummyjson.com/data/products/1/1.jpg",
-            "https://i.dummyjson.com/data/products/1/2.jpg",
-            "https://i.dummyjson.com/data/products/1/3.jpg",
-            "https://i.dummyjson.com/data/products/1/4.jpg",
-            "https://i.dummyjson.com/data/products/1/thumbnail.jpg"
-        ]
-    };
+    const { singleProduct } = useSelector(productSelector);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if(!singleProduct){
+            navigate(-1);
+        }
+    },[singleProduct]);
 
     return(
         <div className="bg-transparent w-full h-[93vh] flex justify-around px-[5%] py-2">
             <div className="bg-white w-full flex flex-wrap">
                 <div className="w-1/3 h-full p-2 flex flex-col">
-                    <div className="w-full h-3/5 flex justify-center items-center border relative">
+                    <div className="w-full h-3/5 flex justify-center items-center border relative overflow-hidden p-2">
                         <div className="absolute w-fit h-fit right-5 top-3 text-slate-300 text-xl cursor-pointer">
                             <i class="fa-solid fa-heart"></i>
                         </div>
@@ -68,7 +61,7 @@ const SingleProduct = () => {
                             <div className="font-bold mt-2 text-2xl">
                                 <span> 
                                     ₹ 
-                                </span>{singleProduct.price} <span className="text-sm text-green-600">
+                                </span>{singleProduct.price * 80} <span className="text-sm text-green-600">
                                     Discount {singleProduct.discountPercentage}%
                                 </span>
                             </div>

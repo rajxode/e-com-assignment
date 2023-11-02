@@ -1,16 +1,18 @@
+
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-
-
-
+import { setSingleProduct } from "../Redux/Reducers/productReducer";
 
 const ProductCard = (props) => {
 
     const {product} = props;
+    const dispatch = useDispatch();
 
     const navigate = useNavigate();
 
     const handleClick = (e) => {
         e.preventDefault();
+        dispatch(setSingleProduct(product));
         navigate('/single-product');
     }
 
@@ -41,7 +43,7 @@ const ProductCard = (props) => {
                         <div className="font-semibold">
                             <span> 
                                 ₹ 
-                            </span> {product.price} <span className="text-xs text-green-600">
+                            </span> { product.price * 80 } <span className="text-xs text-green-600">
                                 Discount {product.discountPercentage}%
                             </span>
                         </div>

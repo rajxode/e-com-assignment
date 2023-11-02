@@ -1,33 +1,28 @@
-import { useState } from "react";
+
 import Filter from "./Filter";
-import { useEffect } from "react";
-import axios from "axios";
 import ProductCard from "./ProductCard";
 import Pagination from "./Pagination";
+import { useDispatch, useSelector } from "react-redux";
+import { getInitialProductThunk, productSelector, setCurrentPage } from "../Redux/Reducers/productReducer";
+import { useEffect } from "react";
+import Loader from './Spinner';
 
 const MainContainer = () => {
 
-    const [products,setProducts] = useState([]);
-    const [pageNumber,setPageNumber] = useState(0);
+    const dispatch = useDispatch();
+    const { products , currentPage , isLoading } = useSelector(productSelector);
 
     useEffect(() => {
-        async function getData(){
-            const response = await axios.get('https://dummyjson.com/products?limit=12');
-            setProducts(response.data.products);
-        }
+        dispatch(getInitialProductThunk());
+    },[])
 
-        getData();
-    },[]);
-
-    useEffect(() => {
-        if(pageNumber >= 0){
-            async function getData(){
-                const response = await axios.get(`https://dummyjson.com/products?limit=12&skip=${pageNumber*12}`);
-                setProducts(response.data.products);
-            }
-            getData();
-        }
-    },[pageNumber]);
+    if(isLoading){
+        return(
+            <div className="w-full h-[93vh] flex justify-center items-center text-xl font-bold">
+                <Loader />
+            </div>
+        )
+    }
 
     return(
         <>
@@ -38,7 +33,7 @@ const MainContainer = () => {
                         products.map((product,i) => <ProductCard key={i} product={product} />)
                     }
                 </div>
-                <Pagination pageNumber={pageNumber} setPageNumber={setPageNumber} />
+                <Pagination pageNumber={currentPage} setPageNumber={setCurrentPage} />
             </div>
         </>
     )
