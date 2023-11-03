@@ -15,6 +15,14 @@ const Container = styled.div`
     justify-content:space-between;
     margin-bottom:30px;
     position:relative;
+    @media (max-width:620px){
+        width:250px;
+        height:450px;
+    }
+    @media (max-width:500px){
+        width:95%;
+        height:450px;
+    }
 `;
 
 const ProductCard = (props) => {
@@ -35,7 +43,7 @@ const ProductCard = (props) => {
             <Container className="transition ease-in-out hover:scale-105 hover:z-10 hover:shadow-md hover:shadow-slate-600">
                 
                 <div className="absolute w-fit h-fit right-5 top-3 text-slate-300 text-xl">
-                <i class="fa-solid fa-heart"></i>
+                    <i class="fa-solid fa-heart"></i>
                 </div>
                 
                 <div className="w-full h-2/3 cursor-pointer" 

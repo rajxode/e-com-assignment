@@ -6,11 +6,15 @@ import styled from "styled-components";
 
 const Container = styled.div`
     width:15%;
+    min-width:200px;
     height:250px;
     background-color:#ffffff;
     border-radius:5px;
     display:flex;
     flex-direction:column;
+    @media (max-width:680px){
+        width:100%;
+    }
 `;
 
 const Filter = (props) => {

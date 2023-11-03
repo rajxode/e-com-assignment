@@ -2,7 +2,61 @@ import { useSelector } from "react-redux";
 import { productSelector } from "../Redux/Reducers/productReducer";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
 
+
+const Container = styled.div`
+    background-color:transparent;
+    width:100%;
+    height:93vh;
+    display:flex;
+    justify-content:space-around;
+    padding:8px 5%;
+    @media (max-width:1150px){
+        padding:8px 2%;
+    }
+    @media (max-width:1050px){
+        padding:8px;
+    }
+    @media (max-width:775px){
+        flex-direction:column;
+    }
+`;
+
+
+const ImageContainer = styled.div`
+    display:flex;
+    flex-direction:column;
+    width:33%;
+    height:100%;
+    padding:8px;
+    @media (max-width:1050px){
+        width:45%;
+    }
+    @media (max-width:775px){
+        width:100%;
+        height:60%;
+    }
+`;
+
+
+const MainContainer = styled.div`
+    display:flex;
+    flex-direction:column;
+    width:66%;
+    height:100%;
+    justify-content:space-between;
+    padding:8px;
+    @media (max-width:1050px){
+        width:55%;
+    }
+    @media (max-width:775px){
+        width:100%;
+        img{
+            width:100%;
+        }
+    }
+`;
 
 const SingleProduct = () => {
 
@@ -16,9 +70,8 @@ const SingleProduct = () => {
     },[singleProduct]);
 
     return(
-        <div className="bg-transparent w-full h-[93vh] flex justify-around px-[5%] py-2">
-            <div className="bg-white w-full flex flex-wrap">
-                <div className="w-1/3 h-full p-2 flex flex-col">
+        <Container>
+                <ImageContainer className="w-1/3 h-full p-2 flex flex-col">
                     <div className="w-full h-3/5 flex justify-center items-center border relative overflow-hidden p-2">
                         <div className="absolute w-fit h-fit right-5 top-3 text-slate-300 text-xl cursor-pointer">
                             <i class="fa-solid fa-heart"></i>
@@ -43,8 +96,8 @@ const SingleProduct = () => {
                             Buy Now
                         </button>
                     </div>
-                </div>
-                <div className="w-2/3 h-full flex flex-col justify-between p-2 overflow-y-scroll"> 
+                </ImageContainer>
+                <MainContainer className="overflow-y-scroll"> 
                     <div className="h-auto w-full flex flex-col justify-between pt-2">
                         <div className="w-full font-semibold flex flex-col my-2 max-h-[100px]">
                             <span className="w-full text-2xl">
@@ -94,9 +147,8 @@ const SingleProduct = () => {
                             }
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
+                </MainContainer>
+        </Container>
     )
 }
 

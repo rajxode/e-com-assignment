@@ -1,4 +1,22 @@
+import styled from "styled-components";
 import ProductCard from "./ProductCard";
+
+const Container = styled.div`
+    width:80%;
+    height:auto;
+    display:flex;
+    flex-direction:column;
+    flex-wrap:wrap;
+    background-color:#ffffff;
+
+    @media (max-width:1200px){
+        width:70%;
+    }
+
+    @media (max-width:680px){
+        width:100%;
+    }
+`;
 
 const ShowProducts = (props) => {
 
@@ -6,13 +24,13 @@ const ShowProducts = (props) => {
 
     return(
         <>
-            <div className="w-[80%] h-auto flex flex-col flex-wrap bg-[#ffffff]">
+            <Container>
                 <div className="w-full h-[45px] text-center text-2xl font-bold">
                     {
                         true && selectedCategory
                     }
                 </div>
-                <div className="flex flex-wrap w-full justify-between">
+                <div className="flex flex-wrap w-full justify-center md:justify-between">
                     {
                         
                         products.length > 0 
@@ -29,7 +47,7 @@ const ShowProducts = (props) => {
                         </h1>
                     }
                 </div>
-            </div>
+            </Container>
         </>
     )
 }
