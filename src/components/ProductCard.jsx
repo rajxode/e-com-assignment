@@ -3,6 +3,19 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setSingleProduct } from "../Redux/Reducers/productReducer";
 
+const Container = styled.div`
+    width:300px;
+    height:475px;
+    background-color:#ffffff;
+    padding:8px;
+    border-radius:4px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    margin-bottom:30px;
+    position:relative;
+`;
+
 const ProductCard = (props) => {
 
     const {product} = props;
@@ -18,7 +31,7 @@ const ProductCard = (props) => {
 
     return(
         <>
-            <div className="w-[300px] h-[475px] bg-[#ffffff] p-2 rounded flex flex-col justify-between mb-[30px] relative transition ease-in-out hover:scale-105 hover:z-10 hover:shadow-md hover:shadow-slate-600">
+            <Container className="transition ease-in-out hover:scale-105 hover:z-10 hover:shadow-md hover:shadow-slate-600">
                 
                 <div className="absolute w-fit h-fit right-5 top-3 text-slate-300 text-xl">
                 <i class="fa-solid fa-heart"></i>
@@ -60,7 +73,7 @@ const ProductCard = (props) => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </Container>
         </>
     )
 }

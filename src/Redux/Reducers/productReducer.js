@@ -3,7 +3,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import axios from "axios";
 
-const initialState = { products:[] , singleProduct:{} , isLoading:false , currentPage : 0 };
+const initialState = { products:[] , singleProduct:{} , isLoading:false , currentPage : 0 , category:[] , selectedCategory:'' };
 
 export const getInitialProductThunk = createAsyncThunk(
     'product/getProduct',
@@ -32,6 +32,44 @@ export const getPageProductThunk = createAsyncThunk(
     }
 )
 
+export const getSearchProductThunk = createAsyncThunk(
+    'product/getSearchProduct',
+    async({name},thunkAPI) => {
+        try {
+            const response = await axios.get(`https://dummyjson.com/products/search?q=${name}`);
+            return response.data.products;
+        } catch (err) {
+            console.log(err);
+        }
+    }
+);
+
+
+export const getAllCategoryThunk = createAsyncThunk(
+    'product/getAllCategory',
+    async() => {
+        try {
+            const response = await axios.get('https://dummyjson.com/products/categories');
+            return response.data;
+        } catch (err) {
+            console.log(err);
+        }
+    }
+)
+
+export const getProductByCategoryThunk = createAsyncThunk(
+    'product/getProductByCategory',
+    async({cat},thunkAPI) => {
+        try {
+            thunkAPI.dispatch(setSelectedCategory(cat));
+            const response = await axios.get(`https://dummyjson.com/products/category/${cat}`);
+            return response.data.products;
+        } catch (err) {
+            console.log(err);
+        }
+    }
+)
+
 const productSlice = createSlice({
         name:'products',
         initialState,
@@ -48,6 +86,9 @@ const productSlice = createSlice({
                     state.currentPage += action.payload;
                     return;
                 }
+            },
+            setSelectedCategory:(state,action) => {
+                state.selectedCategory = action.payload;
             }
         },
         extraReducers:(builder) => {
@@ -66,12 +107,29 @@ const productSlice = createSlice({
                 state.isLoading = false;
                 state.products = [...action.payload];
             })
+            .addCase(getSearchProductThunk.pending,(state,action) => {
+                state.isLoading = true;
+            })
+            .addCase(getSearchProductThunk.fulfilled,(state,action) => {
+                state.isLoading = false;
+                state.products = [...action.payload];
+            })
+            .addCase(getAllCategoryThunk.fulfilled,(state,action) => {
+                state.category = [...action.payload];
+            })
+            .addCase(getProductByCategoryThunk.pending,(state,action) => {
+                state.isLoading = true;
+            })
+            .addCase(getProductByCategoryThunk.fulfilled,(state,action) => {
+                state.isLoading = false;
+                state.products = [...action.payload];
+            })
         }
     }
 )
 
 export const productReducer = productSlice.reducer;
 
-export const { setSingleProduct , setCurrentPage } = productSlice.actions;
+export const { setSingleProduct , setCurrentPage , setSelectedCategory} = productSlice.actions;
 
 export const productSelector = (state) => state.productReducer;

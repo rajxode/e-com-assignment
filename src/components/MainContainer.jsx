@@ -1,20 +1,34 @@
 
 import Filter from "./Filter";
-import ProductCard from "./ProductCard";
 import Pagination from "./Pagination";
 import { useDispatch, useSelector } from "react-redux";
-import { getInitialProductThunk, productSelector, setCurrentPage } from "../Redux/Reducers/productReducer";
-import { useEffect } from "react";
+import { getInitialProductThunk, productSelector, setCurrentPage, setSelectedCategory } from "../Redux/Reducers/productReducer";
+import { useEffect, useState } from "react";
 import Loader from './Spinner';
+import ShowProducts from "./ShowProducts";
+import styled from "styled-components";
+
+
+const Container = styled.div`
+    width:100%;
+    height:100%;
+    min-height:93vh;
+    padding:8px 1%;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:space-between;
+`;
 
 const MainContainer = () => {
 
     const dispatch = useDispatch();
-    const { products , currentPage , isLoading } = useSelector(productSelector);
+    const [price,setPrice] = useState(50000);
+    const { products , currentPage , isLoading , selectedCategory } = useSelector(productSelector);
 
     useEffect(() => {
+        setSelectedCategory('');
         dispatch(getInitialProductThunk());
-    },[])
+    },[]);
 
     if(isLoading){
         return(
@@ -26,15 +40,11 @@ const MainContainer = () => {
 
     return(
         <>
-            <div className="w-full h-full px-[1%] py-2 flex flex-wrap justify-between ">
-                <Filter />
-                <div className="w-[80%] h-auto flex flex-wrap bg-[#ffffff] justify-between">
-                    {
-                        products.map((product,i) => <ProductCard key={i} product={product} />)
-                    }
-                </div>
+            <Container>
+                <Filter price={price} setPrice={setPrice} />
+                <ShowProducts products={products} price={price} selectedCategory={selectedCategory} />
                 <Pagination pageNumber={currentPage} setPageNumber={setCurrentPage} />
-            </div>
+            </Container>
         </>
     )
 }

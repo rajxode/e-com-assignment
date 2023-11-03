@@ -1,8 +1,25 @@
 import { useDispatch, useSelector } from "react-redux";
 import { getPageProductThunk, productSelector, setCurrentPage } from "../Redux/Reducers/productReducer";
+import styled from "styled-components";
+
+const Container = styled.div`
+    width:100%;
+    height:auto;
+    display:flex;
+    justify-content:space-between;
+    padding:0 8px;
+`;
+
+const NavButton = styled.button`
+    height:40px;
+    width:40px;
+    border-radius:50%;
+    background-color:grey;
+    color:white;
+`;
 
 
-const Pagination = (props) => {
+const Pagination = () => {
     
     const dispatch = useDispatch();
     const { currentPage } = useSelector(productSelector);
@@ -13,19 +30,21 @@ const Pagination = (props) => {
     }
 
     return(
-        <div className="w-full h-auto flex justify-between px-2">
-            <button className="h-[40px] w-[40px] rounded-full bg-slate-400 text-white"
+        <>
+        <Container>
+            <NavButton
                     onClick={(e) => changePage(-1)}
                     disabled={ currentPage == 0 }
                 >
                 Prev    
-            </button>
-            <button className="h-[40px] w-[40px] rounded-full bg-slate-400 text-white"
+            </NavButton>
+            <NavButton
                     onClick={(e) => changePage(1)}
                 >
                 Next
-            </button>
-        </div>
+            </NavButton>
+        </Container>
+    </>
     )
 }
 

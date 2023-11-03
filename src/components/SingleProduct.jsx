@@ -26,14 +26,16 @@ const SingleProduct = () => {
                         <img src={singleProduct.thumbnail} alt="image" className="w-[95%] h-auto" />
                     </div>
                     <div className="w-full h-1/5 flex justify-around items-center text-lg">
-                        <button className="w-2/5 min-h-[50px] flex justify-center items-center text-white font-semibold bg-yellow-500 shadow">
+                        <button className="w-2/5 min-h-[50px] flex justify-center items-center text-white font-semibold bg-yellow-500 shadow cursor-not-allowed"
+                                disabled>
                             <span>
                                 <i class="fa-solid fa-cart-shopping"></i> 
                             </span>
                             &nbsp;
                             Add to Cart
                         </button>
-                        <button className="w-2/5 min-h-[50px] flex justify-center items-center text-white font-semibold bg-orange-600 shadow">
+                        <button className="w-2/5 min-h-[50px] flex justify-center items-center text-white font-semibold bg-orange-600 shadow cursor-not-allowed"
+                                disabled>
                             <span>
                                 <i class="fa-solid fa-bolt"></i>
                             </span>
