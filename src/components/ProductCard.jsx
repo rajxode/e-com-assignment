@@ -2,6 +2,7 @@
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setSingleProduct } from "../Redux/Reducers/productReducer";
+import styled from "styled-components";
 
 const Container = styled.div`
     width:300px;
